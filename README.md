@@ -21,7 +21,7 @@ Just a GuardDuty detector. Let AWS do the work of monitoring your account. Right
 
 ### Level 40
 
-![Level40][./Level40.png]
+![Level40](./Level40.png)
 
 GuardDuty -> Eventbridge -> SNS -> You.
 
