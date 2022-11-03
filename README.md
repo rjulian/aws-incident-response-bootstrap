@@ -9,15 +9,23 @@ Each level will be found in a corresponding branch with the `main` branch incorp
 
 Not familiar with running CDK in your account? Check out [the CDK Documentation section][#CDK]
 
-## Level 0
+### Level 0
 
 No incident response infrastructure.
 
 Congrats, you already have this deployed in your AWS account. In fact, you already have a very sophisticated CI/CD deployment of this in your account on behalf of the fine folks at AWS. AWS will email your root email address if it detects any particularly malicious behavior happening in your account, hope you're checking that email!  
 
-## Level 20
+### Level 20
 
 Just a GuardDuty detector. Let AWS do the work of monitoring your account. Right now, you won't be alerted at all, but you would at least be doing some monitoring. Maybe set a regular alarm to go check if there're any findings for your account.
+
+### Level 40
+
+![Level40][./Level40.png]
+
+GuardDuty -> Eventbridge -> SNS -> You.
+
+We take the infrastructure of Level 20 and add in notifications to the deal. Now, GuardDuty will find out about happenings in your account and you can send these to an email address. 
 
 ## CDK
 
