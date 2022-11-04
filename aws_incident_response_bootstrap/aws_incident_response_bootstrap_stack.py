@@ -1,4 +1,4 @@
-from aws_cdk import Stack, aws_guardduty, aws_sns, aws_events, aws_events_targets
+from aws_cdk import Stack, aws_guardduty, aws_sns, aws_events, aws_events_targets, aws_cloudwatch
 from constructs import Construct
 
 
@@ -104,4 +104,41 @@ class AwsIncidentResponseBootstrapStack(Stack):
                     ]
                 },
             ),
+        )
+
+        cfn_anomaly_detector = aws_cloudwatch.CfnAnomalyDetector(
+            self,
+            "LambdaInvocationAnomalyDetector",
+            metric_name="Invocations",
+            namespace="AWS/Lambda",
+            stat="Sum",
+        )
+
+        # You may know some conditions and alarms you want to set about resources in your environment that should trigger security responses.
+        # As a sensible placeholder, we'll respond to lambda errors.
+        alarm = aws_cloudwatch.CfnAlarm(
+            self,
+            "LambdaInvocationsAnomaly",
+            alarm_name="Lambda Invocations Anomaly",
+            alarm_actions=[guardduty_topic.topic_arn],
+            alarm_description="Alert when invocations are out of bands.",
+            comparison_operator="LessThanLowerOrGreaterThanUpperThreshold",
+            threshold_metric_id="ad1",
+            evaluation_periods=1,
+            treat_missing_data="breaching",
+            metrics=[
+                aws_cloudwatch.CfnAlarm.MetricDataQueryProperty(
+                    expression="ANOMALY_DETECTION_BAND(m1, 2)", id="ad1"
+                ),
+                aws_cloudwatch.CfnAlarm.MetricDataQueryProperty(
+                    id="m1",
+                    metric_stat=aws_cloudwatch.CfnAlarm.MetricStatProperty(
+                        metric=aws_cloudwatch.CfnAlarm.MetricProperty(
+                            metric_name="Invocations", namespace="AWS/Lambda"
+                        ),
+                        period=86400,
+                        stat="Sum",
+                    ),
+                ),
+            ],
         )

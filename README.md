@@ -27,6 +27,12 @@ GuardDuty -> Eventbridge -> SNS -> You.
 
 We take the infrastructure of Level 20 and add in notifications to the deal. Now, GuardDuty will find out about happenings in your account and you can send these to an email address. 
 
+### Level 60
+
+![Level60](./Level60.png)
+
+Go beyond GuardDuty. Add in Custom Cloudwatch Events to SNS to you.
+
 ## CDK
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
