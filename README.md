@@ -17,9 +17,13 @@ Congrats, you already have this deployed in your AWS account. In fact, you alrea
 
 ### Level 20
 
+![Level 20](https://github.com/rjulian/aws-incident-response-bootstrap/actions/workflows/main.yml/badge.svg?branch=level20)
+
 Just a GuardDuty detector. Let AWS do the work of monitoring your account. Right now, you won't be alerted at all, but you would at least be doing some monitoring. Maybe set a regular alarm to go check if there're any findings for your account.
 
 ### Level 40
+
+![Level 40](https://github.com/rjulian/aws-incident-response-bootstrap/actions/workflows/main.yml/badge.svg?branch=level40)
 
 ![Level40](./Level40.png)
 
@@ -28,6 +32,8 @@ GuardDuty -> Eventbridge -> SNS -> You.
 We take the infrastructure of Level 20 and add in notifications to the deal. Now, GuardDuty will find out about happenings in your account and you can send these to an email address. 
 
 ### Level 60
+
+![Level 60](https://github.com/rjulian/aws-incident-response-bootstrap/actions/workflows/main.yml/badge.svg?branch=level60)
 
 ![Level60](./Level60.png)
 
