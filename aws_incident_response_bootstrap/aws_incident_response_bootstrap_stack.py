@@ -1,12 +1,14 @@
+"""CDK Stack to set up basic incident response infrastructure."""
 from aws_cdk import Stack, aws_guardduty, aws_sns, aws_events, aws_events_targets
 from constructs import Construct
 
 
 class AwsIncidentResponseBootstrapStack(Stack):
+    """Class defining incident response infrastructure stack."""
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        guardduty_detector = aws_guardduty.CfnDetector(
+        aws_guardduty.CfnDetector(
             self,
             "GuardDutyDetector",
             enable=True,
@@ -39,7 +41,7 @@ class AwsIncidentResponseBootstrapStack(Stack):
         )
 
         # Modify this if you'd rather do an HTTP integration (think Slack or a custom app)
-        guardduty_topic_subscription = aws_sns.Subscription(
+        aws_sns.Subscription(
             self,
             "EmailSubscription",
             topic=guardduty_topic,
@@ -48,7 +50,7 @@ class AwsIncidentResponseBootstrapStack(Stack):
         )
 
         # Rule that alerts on a GuardDuty finding over a severity 5, target associated with rule creation.
-        guardduty_findings_rule = aws_events.Rule(
+        aws_events.Rule(
             self,
             "GuardDutyRule",
             targets=[aws_events_targets.SnsTopic(guardduty_topic)],
