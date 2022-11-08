@@ -46,6 +46,7 @@ Additionally, we now introduce our first "end-user" tool for incident response: 
 
 ![Level80](./Level80.jpg)
 
+At this point, this is hard to automate, but the next level up here is really making sure processes are fine-tuned. Playbooks and training are key to really hammer home here. People should know what to do and be well-prepared in the face of a real incident. Use the tedium of documentation and playbook creation to feed back into automating processes (and reach level 100 at the same time). 
 
 ## CDK
 
