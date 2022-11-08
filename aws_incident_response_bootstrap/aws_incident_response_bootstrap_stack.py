@@ -145,4 +145,4 @@ class AwsIncidentResponseBootstrapStack(Stack):
             ],
         )
 
-        security_hub = aws_securityhub.CfnHub(self, "SecurityHub")
+        aws_securityhub.CfnHub(self, "SecurityHub")
