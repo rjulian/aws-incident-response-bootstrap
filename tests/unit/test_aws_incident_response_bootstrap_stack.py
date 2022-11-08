@@ -35,3 +35,11 @@ def test_eventbridge_rule_and_target_created():
     template.has_resource_properties("AWS::Events::Rule", {
         "State": "ENABLED",
     })
+
+def test_securityhub_created():
+    app = core.App()
+    stack = AwsIncidentResponseBootstrapStack(app, "aws-incident-response-bootstrap")
+    template = assertions.Template.from_stack(stack)
+
+    template.has_resource_properties("AWS::SecurityHub::Hub", {
+    })

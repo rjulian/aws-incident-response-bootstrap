@@ -1,5 +1,5 @@
 """CDK Stack to set up basic incident response infrastructure."""
-from aws_cdk import Stack, aws_guardduty, aws_sns, aws_events, aws_events_targets, aws_cloudwatch
+from aws_cdk import Stack, aws_guardduty, aws_sns, aws_events, aws_events_targets, aws_cloudwatch, aws_securityhub
 from constructs import Construct
 
 
@@ -144,3 +144,5 @@ class AwsIncidentResponseBootstrapStack(Stack):
                 ),
             ],
         )
+
+        security_hub = aws_securityhub.CfnHub(self, "SecurityHub")
