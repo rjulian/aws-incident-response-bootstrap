@@ -37,6 +37,11 @@ We take the infrastructure of Level 20 and add in notifications to the deal. Now
 
 ![Level60](./Level60.png)
 
+### Level 80
+
+![Level80](./Level80.jpg)
+
+
 Go beyond GuardDuty. Add in Custom Cloudwatch Events to SNS to you.
 
 ## CDK
