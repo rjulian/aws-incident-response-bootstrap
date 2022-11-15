@@ -48,6 +48,13 @@ Additionally, we now introduce our first "end-user" tool for incident response: 
 
 At this point, this is hard to automate, but the next level up here is really making sure processes are fine-tuned. Playbooks and training are key to really hammer home here. People should know what to do and be well-prepared in the face of a real incident. Use the tedium of documentation and playbook creation to feed back into automating processes (and reach level 100 at the same time). 
 
+### Level 100
+
+![Level80](./Level100.png)
+
+Automation is the real next goal now that you have documented procedures and a significant amount of monitoring in place. Here we can focus on automation in the "analysis" phase of an incident, perhaps offloading some of the work to a lambda or step function that can match a resource to a specific name as a sign that we need to escalate immediately. When we forward to the incident responder, we can then append this information to the payload in hopes of saving time and communication
+effort. 
+
 ## CDK
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app.
