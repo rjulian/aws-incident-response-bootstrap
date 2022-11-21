@@ -43,3 +43,11 @@ def test_securityhub_created():
 
     template.has_resource_properties("AWS::SecurityHub::Hub", {
     })
+
+def test_lambda_created():
+    app = core.App()
+    stack = AwsIncidentResponseBootstrapStack(app, "aws-incident-response-bootstrap")
+    template = assertions.Template.from_stack(stack)
+
+    template.has_resource_properties("AWS::Lambda::Function", {
+    })

@@ -1,5 +1,5 @@
 """CDK Stack to set up basic incident response infrastructure."""
-from aws_cdk import Stack, aws_guardduty, aws_sns, aws_events, aws_events_targets, aws_cloudwatch, aws_securityhub
+from aws_cdk import Stack, aws_guardduty, aws_sns, aws_events, aws_events_targets, aws_cloudwatch, aws_securityhub, aws_lambda
 from constructs import Construct
 
 
@@ -146,3 +146,30 @@ class AwsIncidentResponseBootstrapStack(Stack):
         )
 
         aws_securityhub.CfnHub(self, "SecurityHub")
+
+        # Lambda function with custom logic to further analyze events and determine whether to alert user.
+        # This function is only logging in cloudwatch the alert, but your choice of alert could be one of many:
+        # It could surface a custom eventbridge event, could send directly to SNS, could invoke a third party tool.
+        admin_user_creation = aws_lambda.Function(self, 'AdminUserCreationHandler',
+                                        runtime=aws_lambda.Runtime.PYTHON_3_7,
+                                        code=aws_lambda.Code.from_asset('lambda'),
+                                        handler='admin_user_creation.handler',)
+        aws_events.Rule(
+            self,
+            "CreateUserRule",
+            targets=[aws_events_targets.LambdaFunction(admin_user_creation)],
+            event_pattern=aws_events.EventPattern(
+                source=["aws.iam"],
+                detail_type=["AWS API Call via CloudTrail"],
+                detail={
+                    "eventSource": [
+                        "iam.amazonaws.com"
+                    ],
+                    "eventName": [
+                        "CreateUser"
+                    ]
+                }
+            ),
+        )
+
+
