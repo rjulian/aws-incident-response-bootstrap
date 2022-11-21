@@ -50,6 +50,8 @@ At this point, this is hard to automate, but the next level up here is really ma
 
 ### Level 100
 
+![Level 100](https://github.com/rjulian/aws-incident-response-bootstrap/actions/workflows/main.yml/badge.svg?branch=level100)
+
 ![Level80](./Level100.png)
 
 Automation is the real next goal now that you have documented procedures and a significant amount of monitoring in place. Here we can focus on automation in the "analysis" phase of an incident, perhaps offloading some of the work to a lambda or step function that can match a resource to a specific name as a sign that we need to escalate immediately. When we forward to the incident responder, we can then append this information to the payload in hopes of saving time and communication
